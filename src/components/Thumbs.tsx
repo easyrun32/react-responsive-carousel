@@ -242,6 +242,7 @@ export default class Thumbs extends Component<Props, State> {
     }
 
     renderItems() {
+        console.log('hello world');
         return this.props.children.map((img, index) => {
             const itemClass = klass.ITEM(false, index === this.state.selectedItem);
 
