@@ -182,11 +182,11 @@ export const fade = () => (
 );
 
 //renderThumbBottom
+let str =
+    'bellooooooooooooooadasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdadssadsssssssssshhiuhiuhiuhuihuihiuhuihiuhhui';
 export const test = () => (
     <Carousel
-        renderThumbBottomContent={'hello'}
-        renderThumbBottomJsStyles={{ backgroundColor: 'red' }}
-        renderThumbBottomStyles={'somestring'}
+        renderThumbBottomContent={<div style={{ wordBreak: 'break-all' }}>{str}</div>}
         renderControlArrowNext={(val) => {
             // console.log('hello world', val);
         }}

@@ -22,7 +22,6 @@ export default class Carousel extends React.Component<CarouselProps, CarouselSta
     private itemsRef?: HTMLElement[];
     private timer?: ReturnType<typeof setTimeout>;
     private animationHandler: AnimationHandler;
-
     static displayName = 'Carousel';
 
     static defaultProps: CarouselProps = {
@@ -42,10 +41,7 @@ export default class Carousel extends React.Component<CarouselProps, CarouselSta
         onSwipeEnd: () => {},
         onSwipeMove: () => false,
         preventMovementUntilSwipeScrollTolerance: false,
-        renderThumbBottomContent: '',
-        renderThumbBottom: false,
-        renderThumbBottomJsStyles: {},
-        renderThumbBottomStyles: '',
+        renderThumbBottomContent: null,
         renderControlArrowNext: (islastposition: any) => false,
         renderControlArrowNextSpeed: 1,
 
@@ -764,6 +760,7 @@ export default class Carousel extends React.Component<CarouselProps, CarouselSta
 
         // console.log('state!', this.state.selectedItem);
         //<div>{this.props.children[this.state.selectedItem].props.children[1].props.children[0]}</div>
+
         return (
             <div
                 aria-label={this.props.ariaLabel}
@@ -801,20 +798,8 @@ export default class Carousel extends React.Component<CarouselProps, CarouselSta
                     {this.props.renderArrowNext(this.onClickNext, hasNext, this.props.labels.rightArrow)}
                     {this.renderStatus()}
                 </div>
-                {this.props.renderThumbBottomContent.length > 0 ? (
-                    <div
-                        style={
-                            Object.keys(this.props.renderThumbBottomJsStyles).length === 0
-                                ? {}
-                                : this.props.renderThumbBottomJsStyles
-                        }
-                        className={
-                            this.props.renderThumbBottomStyles.length > 0 ? this.props.renderThumbBottomStyles : ''
-                        }
-                    >
-                        {this.props.renderThumbBottomContent}
-                    </div>
-                ) : null}
+
+                {this.props.renderThumbBottomContent ? this.props.renderThumbBottomContent : null}
 
                 {this.renderThumbs()}
             </div>
