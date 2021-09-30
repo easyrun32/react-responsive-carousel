@@ -1,9 +1,9 @@
 {
-    "name": "react-responsive-carousel",
+    "name": "reactnodejs32-react-carousel",
     "version": "3.2.21",
     "description": "React Responsive Carousel",
     "author": {
-        "name": "Leandro Augusto Lemos",
+        "name": "bryan",
         "url": "http://leandrowd.github.io/"
     },
     "main": "lib/js/index.js",

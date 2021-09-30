@@ -184,7 +184,7 @@ export const fade = () => (
 export const test = () => (
     <Carousel
         renderControlArrowNext={() => {
-            console.log('hello world?');
+            console.log('wtf?????');
         }}
         swipeable={false}
     >
