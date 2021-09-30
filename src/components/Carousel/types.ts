@@ -47,6 +47,7 @@ export interface CarouselProps {
     renderThumbBottomStyles: string;
     renderThumbBottomJsStyles: object;
     renderThumbBottom: boolean;
+    renderThumbBottomContent: string;
     renderControlArrowNext: (val: any) => any;
     renderControlArrowNextSpeed: number;
     renderArrowPrev: (clickHandler: () => void, hasPrev: boolean, label: string) => React.ReactNode;

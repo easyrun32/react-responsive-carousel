@@ -42,6 +42,7 @@ export default class Carousel extends React.Component<CarouselProps, CarouselSta
         onSwipeEnd: () => {},
         onSwipeMove: () => false,
         preventMovementUntilSwipeScrollTolerance: false,
+        renderThumbBottomContent: '',
         renderThumbBottom: false,
         renderThumbBottomJsStyles: {},
         renderThumbBottomStyles: '',
@@ -758,6 +759,8 @@ export default class Carousel extends React.Component<CarouselProps, CarouselSta
             swiperProps.style = { ...swiperProps.style, height: this.state.itemSize };
             containerStyles.height = this.state.itemSize;
         }
+        // console.log('state!', this.state);
+        // const val = this.props.children[this.state.selectedItem];
 
         // console.log('state!', this.state.selectedItem);
         //<div>{this.props.children[this.state.selectedItem].props.children[1].props.children[0]}</div>
@@ -798,7 +801,7 @@ export default class Carousel extends React.Component<CarouselProps, CarouselSta
                     {this.props.renderArrowNext(this.onClickNext, hasNext, this.props.labels.rightArrow)}
                     {this.renderStatus()}
                 </div>
-                {this.props.renderThumbBottom ? (
+                {this.props.renderThumbBottomContent.length > 0 ? (
                     <div
                         style={
                             Object.keys(this.props.renderThumbBottomJsStyles).length === 0
@@ -809,7 +812,7 @@ export default class Carousel extends React.Component<CarouselProps, CarouselSta
                             this.props.renderThumbBottomStyles.length > 0 ? this.props.renderThumbBottomStyles : ''
                         }
                     >
-                        {this.props.children[this.state.selectedItem].props.children[1].props.children[0]}
+                        {this.props.renderThumbBottomContent}
                     </div>
                 ) : null}
 
