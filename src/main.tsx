@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-
+//IGNORE THIS
 import(/* webpackChunkName: "carousel-component" */ './components/Carousel').then(({ default: Carousel }) => {
     const DemoCarousel = () => (
         <Carousel

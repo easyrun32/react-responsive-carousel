@@ -1,6 +1,7 @@
 %arrows {
     @include transition(all, 0.25s, ease-in);
     @include opacity(0.4);
+
     position: absolute;
     z-index: 2;
     top: 20px;
@@ -15,6 +16,7 @@
     }
 
     &.control-arrow {
+        // background: red;
         &:before {
             margin: 0 5px;
             display: inline-block;
@@ -74,7 +76,7 @@
         @extend %arrows;
         outline: 0;
         border: 0;
-        background: none;
+        background-color: red;
         top: 50%;
         margin-top: -13px;
         font-size: 18px;

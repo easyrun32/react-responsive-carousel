@@ -42,6 +42,9 @@ export default class Carousel extends React.Component<CarouselProps, CarouselSta
         onSwipeEnd: () => {},
         onSwipeMove: () => false,
         preventMovementUntilSwipeScrollTolerance: false,
+
+        renderControlArrowNext: noop,
+
         renderArrowPrev: (onClickHandler: () => void, hasPrev: boolean, label: string) => (
             <button type="button" aria-label={label} className={klass.ARROW_PREV(!hasPrev)} onClick={onClickHandler} />
         ),
@@ -693,6 +696,7 @@ export default class Carousel extends React.Component<CarouselProps, CarouselSta
                 thumbWidth={this.props.thumbWidth}
                 labels={this.props.labels}
                 emulateTouch={this.props.emulateTouch}
+                renderControlArrowNext={this.props.renderControlArrowNext}
             >
                 {this.props.renderThumbs(this.props.children)}
             </Thumbs>

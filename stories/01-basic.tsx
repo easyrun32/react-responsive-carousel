@@ -16,7 +16,7 @@ const createCarouselItemImage = (index, options = {}) => (
     </div>
 );
 
-const baseChildren = <div>{[1, 2, 3, 4, 5].map(createCarouselItemImage)}</div>;
+const baseChildren = <div>{[1, 2, 3, 4, 5, 6].map(createCarouselItemImage)}</div>;
 
 const tooglesGroupId = 'Toggles';
 const valuesGroupId = 'Values';
@@ -177,6 +177,18 @@ export const dynamicHeightImages = () => (
 
 export const fade = () => (
     <Carousel {...getConfigurableProps()} animationHandler="fade" swipeable={false}>
+        {baseChildren.props.children}
+    </Carousel>
+);
+
+export const test = () => (
+    <Carousel
+        renderControlArrowNext={() => {
+            console.log('hello world?');
+        }}
+        swipeable={false}
+    >
+        {baseChildren.props.children}
         {baseChildren.props.children}
     </Carousel>
 );

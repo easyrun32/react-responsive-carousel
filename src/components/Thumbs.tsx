@@ -22,6 +22,8 @@ export interface Props {
     thumbWidth: number;
     transitionTime: number;
     emulateTouch?: boolean;
+
+    renderControlArrowNext: () => void;
 }
 
 interface State {
@@ -242,7 +244,6 @@ export default class Thumbs extends Component<Props, State> {
     }
 
     renderItems() {
-        console.log('hello world');
         return this.props.children.map((img, index) => {
             const itemClass = klass.ITEM(false, index === this.state.selectedItem);
 
@@ -263,7 +264,9 @@ export default class Thumbs extends Component<Props, State> {
             );
         });
     }
-
+    onClickThumbArrow() {
+        this.props.renderControlArrowNext();
+    }
     render() {
         if (!this.props.children) {
             return null;
@@ -305,7 +308,11 @@ export default class Thumbs extends Component<Props, State> {
                     <button
                         type="button"
                         className={klass.ARROW_PREV(!hasPrev)}
-                        onClick={() => this.slideRight()}
+                        onClick={() => {
+                            this.slideRight();
+
+                            // this.onClickThumbArrow();
+                        }}
                         aria-label={this.props.labels.leftArrow}
                     />
                     {isSwipeable ? (
@@ -332,10 +339,15 @@ export default class Thumbs extends Component<Props, State> {
                             {this.renderItems()}
                         </ul>
                     )}
+
                     <button
                         type="button"
                         className={klass.ARROW_NEXT(!hasNext)}
-                        onClick={() => this.slideLeft()}
+                        onClick={() => {
+                            this.slideLeft();
+
+                            this.onClickThumbArrow();
+                        }}
                         aria-label={this.props.labels.rightArrow}
                     />
                 </div>
