@@ -42,8 +42,11 @@ export default class Carousel extends React.Component<CarouselProps, CarouselSta
         onSwipeEnd: () => {},
         onSwipeMove: () => false,
         preventMovementUntilSwipeScrollTolerance: false,
-
-        renderControlArrowNext: noop,
+        renderThumbBottom: false,
+        renderThumbBottomJsStyles: {},
+        renderThumbBottomStyles: '',
+        renderControlArrowNext: (islastposition: any) => false,
+        renderControlArrowNextSpeed: 1,
 
         renderArrowPrev: (onClickHandler: () => void, hasPrev: boolean, label: string) => (
             <button type="button" aria-label={label} className={klass.ARROW_PREV(!hasPrev)} onClick={onClickHandler} />
@@ -697,6 +700,7 @@ export default class Carousel extends React.Component<CarouselProps, CarouselSta
                 labels={this.props.labels}
                 emulateTouch={this.props.emulateTouch}
                 renderControlArrowNext={this.props.renderControlArrowNext}
+                renderControlArrowNextSpeed={this.props.renderControlArrowNextSpeed}
             >
                 {this.props.renderThumbs(this.props.children)}
             </Thumbs>
@@ -754,6 +758,9 @@ export default class Carousel extends React.Component<CarouselProps, CarouselSta
             swiperProps.style = { ...swiperProps.style, height: this.state.itemSize };
             containerStyles.height = this.state.itemSize;
         }
+
+        // console.log('state!', this.state.selectedItem);
+        //<div>{this.props.children[this.state.selectedItem].props.children[1].props.children[0]}</div>
         return (
             <div
                 aria-label={this.props.ariaLabel}
@@ -791,6 +798,21 @@ export default class Carousel extends React.Component<CarouselProps, CarouselSta
                     {this.props.renderArrowNext(this.onClickNext, hasNext, this.props.labels.rightArrow)}
                     {this.renderStatus()}
                 </div>
+                {this.props.renderThumbBottom ? (
+                    <div
+                        style={
+                            Object.keys(this.props.renderThumbBottomJsStyles).length === 0
+                                ? {}
+                                : this.props.renderThumbBottomJsStyles
+                        }
+                        className={
+                            this.props.renderThumbBottomStyles.length > 0 ? this.props.renderThumbBottomStyles : ''
+                        }
+                    >
+                        {this.props.children[this.state.selectedItem].props.children[1].props.children[0]}
+                    </div>
+                ) : null}
+
                 {this.renderThumbs()}
             </div>
         );

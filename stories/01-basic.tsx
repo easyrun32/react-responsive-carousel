@@ -12,7 +12,7 @@ import '../src/examples/presentation/presentation.scss';
 const createCarouselItemImage = (index, options = {}) => (
     <div key={index}>
         <img src={`/assets/${index}.jpeg`} />
-        <p className="legend">Legend {index}</p>
+        <p className="legend">HELLO LEGEND{index}</p>
     </div>
 );
 
@@ -183,12 +183,15 @@ export const fade = () => (
 
 export const test = () => (
     <Carousel
-        renderControlArrowNext={() => {
-            console.log('wtf?????');
+        renderThumbBottom={false}
+        renderThumbBottomJsStyles={{ backgroundColor: 'red' }}
+        renderThumbBottomStyles={'somestring'}
+        renderControlArrowNext={(val) => {
+            console.log('hello world', val);
         }}
+        renderControlArrowNextSpeed={5}
         swipeable={false}
     >
-        {baseChildren.props.children}
-        {baseChildren.props.children}
+        {[...baseChildren.props.children, ...baseChildren.props.children]}
     </Carousel>
 );

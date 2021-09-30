@@ -23,7 +23,8 @@ export interface Props {
     transitionTime: number;
     emulateTouch?: boolean;
 
-    renderControlArrowNext: () => void;
+    renderControlArrowNext: (islastposition: any) => boolean;
+    renderControlArrowNextSpeed: number;
 }
 
 interface State {
@@ -210,8 +211,8 @@ export default class Thumbs extends Component<Props, State> {
         this.moveTo(this.state.firstItem - (typeof positions === 'number' ? positions : 1));
     };
 
-    slideLeft = (positions?: number) => {
-        this.moveTo(this.state.firstItem + (typeof positions === 'number' ? positions : 1));
+    slideLeft = (positions?: number, speed = 1) => {
+        this.moveTo(this.state.firstItem + (typeof positions === 'number' ? positions : speed));
     };
 
     moveTo = (position: number) => {
@@ -265,7 +266,11 @@ export default class Thumbs extends Component<Props, State> {
         });
     }
     onClickThumbArrow() {
-        this.props.renderControlArrowNext();
+        if (this.state.firstItem === this.state.lastPosition) {
+            this.props.renderControlArrowNext(true);
+        } else {
+            this.props.renderControlArrowNext(false);
+        }
     }
     render() {
         if (!this.props.children) {
@@ -277,7 +282,9 @@ export default class Thumbs extends Component<Props, State> {
         // show left arrow?
         const hasPrev = this.state.showArrows && this.state.firstItem > 0;
         // show right arrow
-        const hasNext = this.state.showArrows && this.state.firstItem < this.state.lastPosition;
+
+        //  REVERT               && this.state.firstItem < this.state.lastPosition;
+        const hasNext = this.state.showArrows;
         // obj to hold the transformations and styles
         let itemListStyles = {};
 
@@ -310,8 +317,6 @@ export default class Thumbs extends Component<Props, State> {
                         className={klass.ARROW_PREV(!hasPrev)}
                         onClick={() => {
                             this.slideRight();
-
-                            // this.onClickThumbArrow();
                         }}
                         aria-label={this.props.labels.leftArrow}
                     />
@@ -344,8 +349,7 @@ export default class Thumbs extends Component<Props, State> {
                         type="button"
                         className={klass.ARROW_NEXT(!hasNext)}
                         onClick={() => {
-                            this.slideLeft();
-
+                            this.slideLeft(undefined, this.props.renderControlArrowNextSpeed);
                             this.onClickThumbArrow();
                         }}
                         aria-label={this.props.labels.rightArrow}

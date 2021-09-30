@@ -44,9 +44,11 @@ export interface CarouselProps {
     onSwipeEnd: (event: React.TouchEvent) => void;
     onSwipeMove: (event: React.TouchEvent) => boolean;
     preventMovementUntilSwipeScrollTolerance: boolean;
-
-    renderControlArrowNext: () => void;
-
+    renderThumbBottomStyles: string;
+    renderThumbBottomJsStyles: object;
+    renderThumbBottom: boolean;
+    renderControlArrowNext: (val: any) => any;
+    renderControlArrowNextSpeed: number;
     renderArrowPrev: (clickHandler: () => void, hasPrev: boolean, label: string) => React.ReactNode;
     renderArrowNext: (clickHandler: () => void, hasNext: boolean, label: string) => React.ReactNode;
 

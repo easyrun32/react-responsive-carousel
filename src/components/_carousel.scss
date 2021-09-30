@@ -1,6 +1,6 @@
 %arrows {
     @include transition(all, 0.25s, ease-in);
-    @include opacity(0.4);
+    // @include opacity(0.4);
 
     position: absolute;
     z-index: 2;
@@ -35,14 +35,15 @@
     &.control-prev {
         left: 0;
         &:before {
-            border-right: 8px solid #fff;
+            border-right: 8px solid orange;
         }
     }
 
     &.control-next {
         right: 0;
+
         &:before {
-            border-left: 8px solid #fff;
+            border-left: 10px solid orange;
         }
     }
 }
@@ -76,7 +77,8 @@
         @extend %arrows;
         outline: 0;
         border: 0;
-        background-color: red;
+
+        // background-color: red;
         top: 50%;
         margin-top: -13px;
         font-size: 18px;
