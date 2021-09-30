@@ -18,7 +18,7 @@ export type SwipeAnimationHandler = (
 ) => AnimationHandlerResponse;
 
 export type StopSwipingHandler = (props: CarouselProps, state: CarouselState) => AnimationHandlerResponse;
-
+//update code please
 export interface CarouselProps {
     ariaLabel?: string | undefined;
     axis: 'horizontal' | 'vertical';

@@ -42,7 +42,7 @@ export default class Carousel extends React.Component<CarouselProps, CarouselSta
         onSwipeMove: () => false,
         preventMovementUntilSwipeScrollTolerance: false,
         renderThumbBottomContent: null,
-        renderControlArrowNext: (islastposition: any) => false,
+        renderControlArrowNext: () => false,
         renderControlArrowNextSpeed: 1,
 
         renderArrowPrev: (onClickHandler: () => void, hasPrev: boolean, label: string) => (
