@@ -181,8 +181,10 @@ export const fade = () => (
     </Carousel>
 );
 
+//renderThumbBottom
 export const test = () => (
     <Carousel
+        renderThumbBottomContent={'hello'}
         renderThumbBottomJsStyles={{ backgroundColor: 'red' }}
         renderThumbBottomStyles={'somestring'}
         renderControlArrowNext={(val) => {
