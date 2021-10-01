@@ -36,6 +36,7 @@ export default class Carousel extends React.Component<CarouselProps, CarouselSta
         },
         onClickItem: noop,
         onClickThumb: noop,
+        onClickThumbTime: () => false,
         onChange: noop,
         onSwipeStart: () => {},
         onSwipeEnd: () => {},
@@ -698,6 +699,7 @@ export default class Carousel extends React.Component<CarouselProps, CarouselSta
                 emulateTouch={this.props.emulateTouch}
                 renderControlArrowNext={this.props.renderControlArrowNext}
                 renderControlArrowNextSpeed={this.props.renderControlArrowNextSpeed}
+                onClickThumbTime={this.props.onClickThumbTime}
             >
                 {this.props.renderThumbs(this.props.children)}
             </Thumbs>

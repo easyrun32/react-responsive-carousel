@@ -32,12 +32,14 @@ export interface CarouselProps {
     emulateTouch?: boolean;
     infiniteLoop?: boolean;
     interval: number;
+
     labels: {
         leftArrow: string;
         rightArrow: string;
         item: string;
     };
     onClickItem: (index: number, item: React.ReactNode) => void;
+    onClickThumbTime: (time: any) => any;
     onClickThumb: (index: number, item: React.ReactNode) => void;
     onChange: (index: number, item: React.ReactNode) => void;
     onSwipeStart: (event: React.TouchEvent) => void;

@@ -22,7 +22,7 @@ export interface Props {
     thumbWidth: number;
     transitionTime: number;
     emulateTouch?: boolean;
-
+    onClickThumbTime: (time?: any) => any;
     renderControlArrowNext: (islastposition: any) => boolean;
     renderControlArrowNextSpeed: number;
 }
@@ -54,6 +54,7 @@ export default class Thumbs extends Component<Props, State> {
         selectedItem: 0,
         thumbWidth: 80,
         transitionTime: 350,
+        onClickThumbTime: 0,
     };
 
     constructor(props: Props) {
@@ -152,9 +153,28 @@ export default class Thumbs extends Component<Props, State> {
     handleClickItem = (index: number, item: React.ReactNode, e: React.MouseEvent | React.KeyboardEvent) => {
         if (!isKeyboardEvent(e) || e.key === 'Enter') {
             const handler = this.props.onSelectItem;
-
+            //https://stackoverflow.com/questions/17246275/settimeout-and-array-each
+            //  I think this is best if each timeout was in an array and was poped
+            // out
             if (typeof handler === 'function') {
-                handler(index, item);
+                if (this.props.onClickThumbTime(false)) {
+                    const time = this.props.onClickThumbTime(false);
+                    if (time > 0) {
+                        setTimeout(() => {
+                            handler(index, item);
+                            this.props.onClickThumbTime(true);
+                        }, this.props.onClickThumbTime(false));
+                    } else {
+                        handler(index, item);
+                        this.props.onClickThumbTime(false);
+                    }
+                } else {
+                    handler(index, item);
+                }
+
+                // setTimeout(() => {
+                // handler(index, item);
+                // }, 1200);
             }
         }
     };

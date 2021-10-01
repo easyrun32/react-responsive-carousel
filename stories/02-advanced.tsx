@@ -73,7 +73,14 @@ export const youtubeAutoplayWithCustomThumbs = () => {
         });
 
     return (
-        <Carousel renderItem={customRenderItem} renderThumbs={customRenderThumb}>
+        <Carousel
+            renderItem={customRenderItem}
+            renderThumbs={customRenderThumb}
+            onClickThumbTime={(val) => {
+                console.log(val);
+                return 2000; //give to function
+            }}
+        >
             <YoutubeSlide key="youtube-1" url="https://www.youtube.com/embed/AVn-Yjr7kDc" />
             <YoutubeSlide key="youtube-2" url="https://www.youtube.com/embed/mOdmi9SVeWY" />
             <YoutubeSlide key="youtube-3" url="https://www.youtube.com/embed/n0F6hSpxaFc" />

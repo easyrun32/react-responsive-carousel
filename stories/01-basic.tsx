@@ -187,10 +187,19 @@ let str =
 export const test = () => {
     const [state, setstate] = useState([1, 2, 3, 4]);
     const [stay, setstay] = useState(0);
+    const customRenderItem = (item, props) => {
+        console.log(props);
+        return <item.type {...item.props} {...props} />;
+    };
     return (
         <div>
             <Carousel
                 selectedItem={stay}
+                renderItem={customRenderItem}
+                onClickThumbTime={(val) => {
+                    console.log(val);
+                    return 1000; //give to function
+                }}
                 renderThumbBottomContent={<div style={{ wordBreak: 'break-all' }}>{str}</div>}
                 renderControlArrowNext={(val) => {
                     const x = Math.floor(Math.random() * (5 - 1 + 1) + 1);
