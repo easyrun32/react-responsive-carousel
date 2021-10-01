@@ -215,8 +215,8 @@ export default class Thumbs extends Component<Props, State> {
         this.moveTo(this.state.firstItem + (typeof positions === 'number' ? positions : speed));
     };
 
+    //we can pass a boolean in here that will keep us in the same position
     moveTo = (position: number) => {
-        // position can't be lower than 0
         position = position < 0 ? 0 : position;
         // position can't be higher than last postion
         position = position >= this.state.lastPosition ? this.state.lastPosition : position;
@@ -347,7 +347,7 @@ export default class Thumbs extends Component<Props, State> {
 
                     <button
                         type="button"
-                        className={klass.ARROW_NEXT(!hasNext)}
+                        className={klass.ARROW_NEXT(false)}
                         onClick={() => {
                             this.slideLeft(undefined, this.props.renderControlArrowNextSpeed);
                             this.onClickThumbArrow();

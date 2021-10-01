@@ -1,4 +1,4 @@
-import React, { CSSProperties } from 'react';
+import React, { CSSProperties, useState } from 'react';
 import { action } from '@storybook/addon-actions';
 import { Carousel } from '../src/index';
 
@@ -184,15 +184,33 @@ export const fade = () => (
 //renderThumbBottom
 let str =
     'bellooooooooooooooadasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdadssadsssssssssshhiuhiuhiuhuihuihiuhuihiuhhui';
-export const test = () => (
-    <Carousel
-        renderThumbBottomContent={<div style={{ wordBreak: 'break-all' }}>{str}</div>}
-        renderControlArrowNext={(val) => {
-            // console.log('hello world', val);
-        }}
-        renderControlArrowNextSpeed={5}
-        swipeable={false}
-    >
-        {[...baseChildren.props.children, ...baseChildren.props.children]}
-    </Carousel>
-);
+export const test = () => {
+    const [state, setstate] = useState([1, 2, 3, 4]);
+    const [stay, setstay] = useState(0);
+    return (
+        <div>
+            <Carousel
+                selectedItem={stay}
+                renderThumbBottomContent={<div style={{ wordBreak: 'break-all' }}>{str}</div>}
+                renderControlArrowNext={(val) => {
+                    const x = Math.floor(Math.random() * (5 - 1 + 1) + 1);
+                    if (val) {
+                        setstate([...state, x]);
+                        setstay(state.length);
+                    } else {
+                        console.log('false!');
+                    }
+                }}
+                renderControlArrowNextSpeed={1}
+                swipeable={false}
+            >
+                {state.map((e, i) => (
+                    <div>
+                        <img src={`/assets/${e}.jpeg`} />
+                        <p className="legend">HELLO LEGEND{e}</p>
+                    </div>
+                ))}
+            </Carousel>
+        </div>
+    );
+};
