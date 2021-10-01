@@ -188,7 +188,6 @@ export const test = () => {
     const [state, setstate] = useState([1, 2, 3, 4]);
     const [stay, setstay] = useState(0);
     const customRenderItem = (item, props) => {
-        console.log(props);
         return <item.type {...item.props} {...props} />;
     };
     return (

@@ -530,11 +530,37 @@ export default class Carousel extends React.Component<CarouselProps, CarouselSta
     };
 
     onClickNext = () => {
-        this.increment(1);
+        if (this.props.onClickThumbTime(false)) {
+            const time = this.props.onClickThumbTime(false);
+            if (time > 0) {
+                setTimeout(() => {
+                    this.increment(1);
+                    this.props.onClickThumbTime(true);
+                }, this.props.onClickThumbTime(false));
+            } else {
+                this.increment(1);
+                this.props.onClickThumbTime(false);
+            }
+        } else {
+            this.increment(1);
+        }
     };
 
     onClickPrev = () => {
-        this.decrement(1);
+        if (this.props.onClickThumbTime(false)) {
+            const time = this.props.onClickThumbTime(false);
+            if (time > 0) {
+                setTimeout(() => {
+                    this.decrement(1);
+                    this.props.onClickThumbTime(true);
+                }, this.props.onClickThumbTime(false));
+            } else {
+                this.decrement(1);
+                this.props.onClickThumbTime(false);
+            }
+        } else {
+            this.decrement(1);
+        }
     };
 
     onSwipeForward = () => {
