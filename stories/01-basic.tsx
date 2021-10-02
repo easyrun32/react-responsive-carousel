@@ -199,6 +199,11 @@ export const test = () => {
                     console.log(val);
                     return 1000; //give to function
                 }}
+                renderLoader={
+                    <div style={{ position: 'absolute', backgroundColor: 'red', width: '100%', height: '100%' }}>
+                        ss
+                    </div>
+                }
                 renderThumbBottomContent={<div style={{ wordBreak: 'break-all' }}>{str}</div>}
                 renderControlArrowNext={(val) => {
                     const x = Math.floor(Math.random() * (5 - 1 + 1) + 1);

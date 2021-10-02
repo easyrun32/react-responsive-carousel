@@ -25,6 +25,7 @@ export interface Props {
     onClickThumbTime: (time?: any) => any;
     renderControlArrowNext: (islastposition: any) => boolean;
     renderControlArrowNextSpeed: number;
+    renderLoader: React.ReactNode;
 }
 
 interface State {
@@ -35,6 +36,7 @@ interface State {
     lastPosition: number;
     showArrows: boolean;
     swiping: boolean;
+    unClickableThumbs: boolean;
 }
 
 export default class Thumbs extends Component<Props, State> {
@@ -55,6 +57,7 @@ export default class Thumbs extends Component<Props, State> {
         thumbWidth: 80,
         transitionTime: 350,
         onClickThumbTime: 0,
+        unClickableThumbs: false,
     };
 
     constructor(props: Props) {
@@ -64,6 +67,7 @@ export default class Thumbs extends Component<Props, State> {
             selectedItem: props.selectedItem,
             swiping: false,
             showArrows: false,
+            unClickableThumbs: false,
             firstItem: 0,
             visibleItems: 0,
             lastPosition: 0,
@@ -160,11 +164,18 @@ export default class Thumbs extends Component<Props, State> {
                 if (this.props.onClickThumbTime(false)) {
                     const time = this.props.onClickThumbTime(false);
                     if (time > 0) {
-                        setTimeout(() => {
-                            handler(index, item);
-                            this.props.onClickThumbTime(true);
-                        }, this.props.onClickThumbTime(false));
+                        setTimeout(
+                            () => {
+                                handler(index, item);
+                                this.props.onClickThumbTime(true);
+                                this.setState({ ...this.state, unClickableThumbs: false });
+                            },
+
+                            this.props.onClickThumbTime(false)
+                        );
+                        this.setState({ ...this.state, unClickableThumbs: true });
                     } else {
+                        this.setState({ ...this.state, unClickableThumbs: false });
                         handler(index, item);
                         this.props.onClickThumbTime(false);
                     }
@@ -340,30 +351,37 @@ export default class Thumbs extends Component<Props, State> {
                         }}
                         aria-label={this.props.labels.leftArrow}
                     />
-                    {isSwipeable ? (
-                        <Swipe
-                            tagName="ul"
-                            className={klass.SLIDER(false, this.state.swiping)}
-                            onSwipeLeft={this.slideLeft}
-                            onSwipeRight={this.slideRight}
-                            onSwipeMove={this.onSwipeMove}
-                            onSwipeStart={this.onSwipeStart}
-                            onSwipeEnd={this.onSwipeEnd}
-                            style={itemListStyles}
-                            innerRef={this.setItemsListRef}
-                            allowMouseEvents={this.props.emulateTouch}
-                        >
-                            {this.renderItems()}
-                        </Swipe>
-                    ) : (
-                        <ul
-                            className={klass.SLIDER(false, this.state.swiping)}
-                            ref={(node: HTMLUListElement) => this.setItemsListRef(node)}
-                            style={itemListStyles}
-                        >
-                            {this.renderItems()}
-                        </ul>
-                    )}
+                    <div style={this.state.unClickableThumbs ? { pointerEvents: 'none', cursor: 'default' } : {}}>
+                        {this.state.unClickableThumbs
+                            ? this.props.renderLoader
+                                ? this.props.renderLoader
+                                : null
+                            : null}
+                        {isSwipeable ? (
+                            <Swipe
+                                tagName="ul"
+                                className={klass.SLIDER(false, this.state.swiping)}
+                                onSwipeLeft={this.slideLeft}
+                                onSwipeRight={this.slideRight}
+                                onSwipeMove={this.onSwipeMove}
+                                onSwipeStart={this.onSwipeStart}
+                                onSwipeEnd={this.onSwipeEnd}
+                                style={itemListStyles}
+                                innerRef={this.setItemsListRef}
+                                allowMouseEvents={this.props.emulateTouch}
+                            >
+                                {this.renderItems()}
+                            </Swipe>
+                        ) : (
+                            <ul
+                                className={klass.SLIDER(false, this.state.swiping)}
+                                ref={(node: HTMLUListElement) => this.setItemsListRef(node)}
+                                style={itemListStyles}
+                            >
+                                {this.renderItems()}
+                            </ul>
+                        )}
+                    </div>
 
                     <button
                         type="button"

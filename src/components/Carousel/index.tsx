@@ -43,6 +43,7 @@ export default class Carousel extends React.Component<CarouselProps, CarouselSta
         onSwipeMove: () => false,
         preventMovementUntilSwipeScrollTolerance: false,
         renderThumbBottomContent: null,
+        renderLoader: null,
         renderControlArrowNext: () => false,
         renderControlArrowNextSpeed: 1,
 
@@ -726,6 +727,7 @@ export default class Carousel extends React.Component<CarouselProps, CarouselSta
                 renderControlArrowNext={this.props.renderControlArrowNext}
                 renderControlArrowNextSpeed={this.props.renderControlArrowNextSpeed}
                 onClickThumbTime={this.props.onClickThumbTime}
+                renderLoader={this.props.renderLoader}
             >
                 {this.props.renderThumbs(this.props.children)}
             </Thumbs>

@@ -41,12 +41,13 @@ export interface CarouselProps {
     onClickItem: (index: number, item: React.ReactNode) => void;
     onClickThumbTime: (time: any) => any;
     onClickThumb: (index: number, item: React.ReactNode) => void;
+
     onChange: (index: number, item: React.ReactNode) => void;
     onSwipeStart: (event: React.TouchEvent) => void;
     onSwipeEnd: (event: React.TouchEvent) => void;
     onSwipeMove: (event: React.TouchEvent) => boolean;
     preventMovementUntilSwipeScrollTolerance: boolean;
-
+    renderLoader: React.ReactNode;
     renderThumbBottomContent: React.ReactNode;
     renderControlArrowNext: (val: any) => any;
     renderControlArrowNextSpeed: number;
